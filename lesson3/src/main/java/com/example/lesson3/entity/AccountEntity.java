@@ -24,6 +24,9 @@ public class AccountEntity {
     @OneToMany(mappedBy = "account")
     private List<TrainerEntity> trainer;
 
+    @OneToMany(mappedBy = "account1")
+    private  List<HorseAccount> horseAccounts;
+
     public AccountEntity(Long id) {
         this.id = id;
     }

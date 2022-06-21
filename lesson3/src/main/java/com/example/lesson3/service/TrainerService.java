@@ -1,8 +1,9 @@
 package com.example.lesson3.service;
 
+import com.example.lesson3.dto.TrainerResponse;
+import com.example.lesson3.entity.ResponseObject;
 import com.example.lesson3.entity.TrainerEntity;
-import com.example.lesson3.repository.TrainerRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,8 +11,8 @@ import java.util.List;
 @Service
 public interface TrainerService {
 
-    public TrainerEntity findTrainerByID(Long id);
-    public List<TrainerEntity> findAll();
-    public void deleteByID(Long id);
-    public void updateTrainer(TrainerEntity trainerEntity);
+    public ResponseEntity<ResponseObject> findTrainerByID(Long id);
+    public List<TrainerResponse> findAll();
+    public ResponseEntity<ResponseObject> deleteByID(Long id);
+    public ResponseEntity<ResponseObject> updateTrainer1(Long id,TrainerEntity newTrainer);
 }

@@ -1,5 +1,6 @@
 package com.example.lesson3.controller;
 
+import com.example.lesson3.dto.HorseRequest;
 import com.example.lesson3.entity.HorseEntity;
 import com.example.lesson3.entity.ResponseObject;
 import com.example.lesson3.service.HorseService;
@@ -14,36 +15,23 @@ public class HorseController {
 
     @Autowired
     HorseService horseService;
-
-
-    @PostMapping()
-    public ResponseEntity<?> createHorse(@RequestBody HorseEntity horseEntity){
-        horseService.save(horseEntity);
-        return ResponseEntity.ok(horseService.findAll());
+    // get horse by id trainer and year
+    @GetMapping("/all")
+    public ResponseEntity<?> getListHorseByYearAndTrainerID(@RequestParam("trainerID") Long trainerID, @RequestParam("year") int year ){
+        return  ResponseEntity.ok(horseService.getListHorseByTrainerIdAndYear(trainerID,year));
     }
-
+    @PostMapping()
+    public ResponseEntity<?> createHorse(@RequestBody HorseRequest horseRequest){
+        return horseService.createHorse(horseRequest);
+    }
     // isPresent đê kiểm tra xem object có dữ liệu không
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateByID(@PathVariable("id") Long id,@RequestBody HorseEntity horseEntity){
-        HorseEntity horseEntity1 = new HorseEntity();
-        horseEntity1 = horseService.findHorseById(id);
-        horseEntity1.setName(horseEntity.getName());
-        horseEntity1.setFoaled(horseEntity.getFoaled());
-        horseService.save(horseEntity1);
-        return  ResponseEntity.ok(horseService.findAll());
+    // tạo ra horseRequest để nhận dữ liệu từ trên trên client xuống
+    public ResponseEntity<?> updateByID(@PathVariable("id") Long id,@RequestBody HorseRequest horseRequest){
+        return  horseService.update(id,horseRequest);
     }
-
     @DeleteMapping("/{id}")
     public ResponseEntity<ResponseObject> deleteHorse(@PathVariable("id") Long id){
-        if(horseService.findHorseById(id) != null){
-            horseService.deleteById(id);
-            return ResponseEntity.status(HttpStatus.OK).body(
-                    new ResponseObject("Oke","Deleted successfully","")
-            );
-        }else
-            return  ResponseEntity.status(HttpStatus.NOT_FOUND).body(
-                    new ResponseObject("Failed","Not found horse by id = " + id,"")
-            );
+        return horseService.deleteById(id);// viết câu query
     }
-
 }

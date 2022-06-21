@@ -1,7 +1,16 @@
 package com.example.lesson3.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "horseaccount")
 public class HorseAccount {
@@ -11,12 +20,14 @@ public class HorseAccount {
 
     @Column
     private int archive;
-
-//    @ManyToOne
-//    @JoinColumn(name = "accountID",nullable = false)
-//    private AccountEntity account;
-
-//    @OneToMany(mappedBy = "")
+// môt account có thể có nhiều trong horseaccount
+    @ManyToOne
+    @JoinColumn(name = "accountID",nullable = false)
+    private AccountEntity account1;
+// một horse có thể có nhiều trong horseaccount
+    @ManyToOne
+    @JoinColumn(name = "horseID",nullable = false)
+    private HorseEntity horse;
 
     public Long getId() {
         return id;

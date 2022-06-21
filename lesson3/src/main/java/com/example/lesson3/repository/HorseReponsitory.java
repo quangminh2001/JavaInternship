@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface HorseReponsitory extends JpaRepository<HorseEntity,Long> {
     HorseEntity findFirstById(Long id);
-    HorseEntity findAllByIdAnd
+
 }

@@ -1,21 +1,16 @@
 package com.example.lesson3.controller;
 
 
+import com.example.lesson3.dto.AccountRequest;
+import com.example.lesson3.dto.AccountResponse;
 import com.example.lesson3.entity.AccountEntity;
 import com.example.lesson3.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 //import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import javax.xml.bind.DatatypeConverter;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
-import static javax.xml.bind.DatatypeConverter.*;
+import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/account")
@@ -25,25 +20,18 @@ public class AccountController {
     private AccountService accountService;
 
     @PostMapping("")
-    public ResponseEntity<?> createAccount(@RequestBody AccountEntity accountEntity){
-//        System.out.println(accountEntity.toString());
-//        String pw = accountEntity.getPassword();
-//        MessageDigest md = null;
-//        try {
-//            md = MessageDigest.getInstance("MD5");
-//            md.update(pw.getBytes());
-//            byte[] digest = md.digest();
-//            String myHash = printHexBinary(digest).toUpperCase();
-//        } catch (NoSuchAlgorithmException e) {
-//            e.printStackTrace();
-//        }
-//        System.out.println(pw);
-//        accountService.createAccount(accountEntity);
-        return ResponseEntity.ok(accountService.findAll());
+    public ResponseEntity<?> createAccount(@RequestBody AccountRequest accountRequest){
+//        accountService.createAccount(accountRequest);
+        return accountService.createAccount(accountRequest);
     }
-    @PostMapping("/{login}")
-    public ResponseEntity<?> loginAccount(@RequestBody AccountEntity accountEntity){
 
-        return ResponseEntity.ok(accountService.loginAccount(accountEntity));
+    @PostMapping("/login")
+    public ResponseEntity<?> loginAccount(@RequestBody AccountRequest accountRequest){
+        return accountService.loginAccount(accountRequest);
+    }
+    @PostMapping("/{change_password}")
+    public ResponseEntity<?> changePassword(HttpServletRequest request, @RequestBody String password){
+        String header = request.getHeader("Authorization");
+        return accountService.changePassword(header,password);
     }
 }
