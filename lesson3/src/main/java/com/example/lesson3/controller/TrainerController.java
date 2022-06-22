@@ -1,6 +1,8 @@
 package com.example.lesson3.controller;
 
 
+import com.example.lesson3.dto.TrainerRequest;
+import com.example.lesson3.dto.TrainerResponse;
 import com.example.lesson3.entity.BaseEntity;
 import com.example.lesson3.entity.ResponseObject;
 import com.example.lesson3.entity.TrainerEntity;
@@ -10,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/trainer")
@@ -31,9 +35,9 @@ public class TrainerController {
 
     // update trainer
     @PutMapping("/{id}")
-    public  ResponseEntity<?> updateTrainer(@PathVariable("id") Long id,@RequestBody TrainerEntity trainerEntity){
+    public  ResponseEntity<?> updateTrainer(@PathVariable("id") Long id,@RequestBody @Valid TrainerRequest trainerRequest){
 //        trainerService.updateTrainer1(id,trainerEntity);
-        return trainerService.updateTrainer1(id,trainerEntity);
+        return trainerService.updateTrainer1(id,trainerRequest);
     }
 
     //delete by id

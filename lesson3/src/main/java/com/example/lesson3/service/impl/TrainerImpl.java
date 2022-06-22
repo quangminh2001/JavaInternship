@@ -1,5 +1,6 @@
 package com.example.lesson3.service.impl;
 
+import com.example.lesson3.dto.TrainerRequest;
 import com.example.lesson3.dto.TrainerResponse;
 import com.example.lesson3.entity.ResponseObject;
 import com.example.lesson3.entity.TrainerEntity;
@@ -44,7 +45,7 @@ public class TrainerImpl implements TrainerService {
     }
     // update trainer by id
     @Override
-    public ResponseEntity<ResponseObject> updateTrainer1(Long id,TrainerEntity newTrainer) {
+    public ResponseEntity<ResponseObject> updateTrainer1(Long id, TrainerRequest newTrainer) {
         TrainerEntity trainerEntity = trainerRepository.findFirstById(id);
         if(findTrainerByID(trainerEntity.getId()) == null)
         {
@@ -55,11 +56,9 @@ public class TrainerImpl implements TrainerService {
         {
             if(!newTrainer.getName().isEmpty())
                 trainerEntity.setName(newTrainer.getName());
-            if(newTrainer.getAccount() != null)
-                trainerEntity.setAccount(newTrainer.getAccount());
                 trainerRepository.save(trainerEntity);
             return ResponseEntity.status(HttpStatus.OK).body(
-                    new ResponseObject("Oke","Update successfully trainer id = " + trainerEntity.getId(),Convert.entityToDto(new TrainerResponse(),trainerRepository.getReferenceById(id))));
+                    new ResponseObject("Oke","Update successfully trainer id = " + trainerEntity.getId(),Convert.entityToDto(new TrainerResponse(),trainerRepository.findFirstById(id))));
         }
     }
     @Override

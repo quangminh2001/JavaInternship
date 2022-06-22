@@ -1,5 +1,6 @@
 package com.example.lesson3.service;
 
+import com.example.lesson3.dto.TrainerRequest;
 import com.example.lesson3.dto.TrainerResponse;
 import com.example.lesson3.entity.ResponseObject;
 import com.example.lesson3.entity.TrainerEntity;
@@ -14,5 +15,5 @@ public interface TrainerService {
     public ResponseEntity<ResponseObject> findTrainerByID(Long id);
     public List<TrainerResponse> findAll();
     public ResponseEntity<ResponseObject> deleteByID(Long id);
-    public ResponseEntity<ResponseObject> updateTrainer1(Long id,TrainerEntity newTrainer);
+    public ResponseEntity<ResponseObject> updateTrainer1(Long id, TrainerRequest newTrainer);
 }

@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/account")
@@ -20,13 +21,13 @@ public class AccountController {
     private AccountService accountService;
 
     @PostMapping("")
-    public ResponseEntity<?> createAccount(@RequestBody AccountRequest accountRequest){
+    public ResponseEntity<?> createAccount(@RequestBody @Valid AccountRequest accountRequest){
 //        accountService.createAccount(accountRequest);
         return accountService.createAccount(accountRequest);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> loginAccount(@RequestBody AccountRequest accountRequest){
+    public ResponseEntity<?> loginAccount(@RequestBody @Valid AccountRequest accountRequest){
         return accountService.loginAccount(accountRequest);
     }
     @PostMapping("/{change_password}")
