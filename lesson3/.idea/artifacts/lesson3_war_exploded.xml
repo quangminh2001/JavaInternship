@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="lesson3:war exploded">
-    <output-path>$PROJECT_DIR$/target/com.devpro.shop16</output-path>
+    <output-path>$PROJECT_DIR$/target/com.bluebottle.lesson3</output-path>
     <properties id="maven-jee-properties">
       <options>
         <exploded>true</exploded>
@@ -47,6 +47,7 @@
           <element id="library" level="project" name="Maven: org.apache.tomcat.embed:tomcat-embed-el:9.0.17" />
           <element id="library" level="project" name="Maven: org.eclipse.jdt:ecj:3.15.0" />
           <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-starter-validation:2.1.4.RELEASE" />
+          <element id="library" level="project" name="Maven: org.flywaydb:flyway-core:5.2.4" />
           <element id="library" level="project" name="Maven: mysql:mysql-connector-java:8.0.15" />
           <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-starter-data-jpa:2.1.4.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-starter-aop:2.1.4.RELEASE" />
@@ -87,7 +88,7 @@
         </element>
       </element>
       <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/target/com.devpro.shop16/META-INF/MANIFEST.MF" />
+        <element id="file-copy" path="$PROJECT_DIR$/target/com.bluebottle.lesson3/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="lesson3/web/Web" />
     </root>
